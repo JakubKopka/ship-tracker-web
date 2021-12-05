@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Ship tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## O aplikacji
 
-## Available Scripts
+Aplikacja służy do śledzenia aktualnej pozycji oraz celu podróży statków.
 
-In the project directory, you can run:
+### Działanie
+Statki są oznaczone pinami z ikonką statku, po kliknięciu wybranego statku wyświetla się zestaw informacji na jego temat + jeśli znane są dane na temat celu podróży oznaczona jest jego droga do tego celu (cel oznaczony jest wyróżniającą się pinezką).
 
-### `npm start`
+Informacje nt. konkretnych statków:
+- nazwa statku
+- typ statku (każdy typ jest zwizualizowany odpowiednim zdjęciem tego typu statku)
+- kierunek ruchu statku
+- poziom zanurzenia
+- znak wywoławczy
+- kraj pochodzenia statku
+- lokalizacja celu (miasto, kraj, kontynent)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Niektóre informacje zawierają wyjaśnienie w dymku.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Widok przystosowany do różnych szerokości ekranu.
 
-### `npm test`
+### Technologie
+Frontend: 
+- React.js
+- styled-components
+- Open Street Map by react-leaflet
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Backend:
+- Spring Boot
+- Hibernate
+- Swagger
+- JUnit 5
+- PostgreSQL
+- Docker
 
-### `npm run build`
+### Dane
+Dane pochodzą z dwóch API:
+- www.barentswatch.no
+- www.positionstack.com
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Przykładowe widoki
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Desktop:
+![Desktop - information modal](./src/assets/screenshots/Ship%20tracker%20-%20desktop%20-%20information%20modal.png)
+![Explanation tooltip](./src/assets/screenshots/Ship%20tracker%20-%20explanation%20tooltip.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Mobile:
+![Mobile - pin active](./src/assets/screenshots/Ship%20tracker%20-%20iPhone%206%20-%20pin%20active.png)
+![Mobile - information modal](./src/assets/screenshots/Ship%20tracker%20-%20iPhone%206%20-%20information%20modal.png)
 
-### `npm run eject`
+## Uruchomienie aplikacji
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Zbuduj wersję `.jar` aplikacji poprzez komendę `mvn clean package`
+2. Przenieś wygenerowany plik - `ship-tracker-0.0.1-SNAPSHOT.jar` do folderu `src/docker`
+3. Wypełnij brakujące dane w `docker-compose.yml`
+- `API_BARENTSWATCH_CLIENT_ID` - twój klient id z api www.barentswatch.no(np. xyz@sdvrecft.com:jan.kowalski)
+- `API_BARENTSWATCH_CLIENT_SECRET` - twój sekret dla klienta z api www.barentswatch.no
+- `API_POSITIONSTACK_ACCESSKEY` -  klucz dostępu z api www.positionstack.com
+4. Uruchom aplikacje za pomocą `docker-compose up`, zatrzymaj za pomocą `docker-compose down`
+5. Swagger UI jest dostępny pod adresem: `http://localhost:8081/swagger-ui.html`
