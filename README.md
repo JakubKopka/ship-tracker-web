@@ -51,11 +51,7 @@ Mobile:
 
 ## Uruchomienie aplikacji
 
-1. Zbuduj wersję `.jar` aplikacji poprzez komendę `mvn clean package`
-2. Przenieś wygenerowany plik - `ship-tracker-0.0.1-SNAPSHOT.jar` do folderu `src/docker`
-3. Wypełnij brakujące dane w `docker-compose.yml`
-- `API_BARENTSWATCH_CLIENT_ID` - twój klient id z api www.barentswatch.no(np. xyz@sdvrecft.com:jan.kowalski)
-- `API_BARENTSWATCH_CLIENT_SECRET` - twój sekret dla klienta z api www.barentswatch.no
-- `API_POSITIONSTACK_ACCESSKEY` -  klucz dostępu z api www.positionstack.com
-4. Uruchom aplikacje za pomocą `docker-compose up`, zatrzymaj za pomocą `docker-compose down`
-5. Swagger UI jest dostępny pod adresem: `http://localhost:8081/swagger-ui.html`
+1. Wykonaj instrukę budowy projektu dla API, sekcja "Uruchomienie aplikacji": https://github.com/JakubKopka/ship-tracker-api/blob/master/README.md
+2. Przejdz do głównego folderu projektu 
+3. W terminalu wykonaj komendę: `docker-compose up`
+4. Przejdz na stornę `http://localhost:3000/`
